@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Daily Carl</string>
+    <string name="email_login_text">Email</string>
+    <string name="pass_login_text">Password</string>
+    <string name="login_button">Log in</string>
+    <string name="need_account">Need an account?</string>
+    <string name="point_to_signup"><u>Sign up here</u></string>
+    <string name="daily_carl">logo</string>
+    <string name="login_email_input" />
+    <string name="pass_login_input" />
+    <string name="logo">logo</string>
+    <string name="name_signup">Name</string>
+    <string name="name_singup_input" />
+    <string name="email_signup_input" />
+    <string name="pass_signup_input" />
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_pass_input" />
+    <string name="signup_button">Register</string>
+    <string name="have_account">Already have account?</string>
+    <string name="point_to_login"><u>Login here</u></string>
+</resources>
