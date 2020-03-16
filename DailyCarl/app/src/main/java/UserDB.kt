@@ -1,0 +1,1 @@
+class UserDB(val id: String, val username: String)
