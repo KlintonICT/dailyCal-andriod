@@ -18,4 +18,37 @@
     <string name="signup_button">Register</string>
     <string name="have_account">Already have account?</string>
     <string name="point_to_login"><u>Login here</u></string>
+    <string name="action_bar">Daily Carl</string>
+    <string name="action_bar_goal">Goal</string>
+    <string name="goal_title">Set your goal</string>
+    <string name="ex_logo">ex_logo</string>
+    <string name="exercise_goal_input" />
+    <string name="cal_per_day">Cal/day</string>
+    <string name="food_logo">food_logo</string>
+    <string name="food_goal_input" />
+    <string name="cal_per_day_food">Cal/day</string>
+    <string name="goal_submit">OK</string>
+    <string name="user_profile">user profile</string>
+    <string name="user_name">Ampere Vipawan</string>
+    <string name="nav_add_activity">Add Activity</string>
+    <string name="nav_viewCalory">View Remaining Calories</string>
+    <string name="nav_editGoal">Edit Your Goal</string>
+    <string name="nav_setting">Setting</string>
+    <string name="nav_logout">Logout</string>
+    <string name="logout_logo">logout logo</string>
+    <string name="add_eat_act_btn">Add Eat Activity</string>
+    <string name="add_not_food_act">Add Exercise Activity</string>
+    <string name="add_activity_title">Add Activity</string>
+    <string name="setting_title">Setting</string>
+    <string name="profile_view">profile view</string>
+    <string name="setting_name">Name</string>
+    <string name="setting_name_input" />
+    <string name="setting_email">Email</string>
+    <string name="setting_email_input" />
+    <string name="setting_update">Update</string>
+
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Thai</item>
+    </string-array>
 </resources>
