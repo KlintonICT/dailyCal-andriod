@@ -55,13 +55,13 @@ class MainActivity : AppCompatActivity() {
                         pass_login_input.error = "Please check your password. Password must have minimum 6 characters."
                         Log.d(TAG, "Enter password less than 6 characters.")
                     }else{
-                        Toast.makeText(getApplicationContext(), "Authentication Failed: " + task.exception, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(getApplicationContext(), "Couldn't find your DailyCarl account" + task.exception, Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "Authentication Failed: " + task.exception)
                     }
                 }else{
                     Toast.makeText(getApplicationContext(), "Sign in successfully!", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "Sign in successfully!")
-                    startActivity(Intent(this@MainActivity, GoalActivity::class.java))
+                    startActivity(Intent(this@MainActivity, HandleDrawerNav::class.java))
                     finish()
                 }
             }

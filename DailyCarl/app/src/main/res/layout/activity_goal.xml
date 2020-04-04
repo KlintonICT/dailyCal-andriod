@@ -12,13 +12,142 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/welcome"
+            android:id="@+id/action_bar_goal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="50dp"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:background="#DCDB53"
             android:textAlignment="center"
+            android:paddingVertical="20dp"
+            android:textSize="25sp"
+            android:text="@string/action_bar_goal" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            android:contentDescription="@string/logo"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/goal_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            android:layout_marginVertical="5dp"
+            android:textColor="#000000"
+            android:text="@string/goal_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="Welcome to Daily Carl" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ex_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="30dp"
+                android:contentDescription="@string/ex_logo"
+                app:srcCompat="@drawable/ex_logo" />
+
+            <EditText
+                android:id="@+id/ex_goal_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:background="@drawable/rounded_input"
+                android:ems="10"
+                android:hint="@string/exercise_goal_input"
+                android:inputType="number"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="10dp"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/cal_per_day"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/cal_per_day" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/food_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="30dp"
+                android:contentDescription="@string/food_logo"
+                app:srcCompat="@drawable/food_logo" />
+
+            <EditText
+                android:id="@+id/food_goal_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:background="@drawable/rounded_input"
+                android:ems="10"
+                android:hint="@string/food_goal_input"
+                android:inputType="number"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="10dp"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/cal_per_day_food"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginEnd="20dp"
+                android:text="@string/cal_per_day_food" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/goal_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:background="@drawable/rounded_button"
+                android:paddingHorizontal="70dp"
+                android:paddingVertical="10dp"
+                android:text="@string/goal_submit" />
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
