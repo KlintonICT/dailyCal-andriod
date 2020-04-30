@@ -12,14 +12,22 @@
     android:paddingTop="50dp"
     android:paddingBottom="15dp">
 
-    <ImageView
-        android:id="@+id/userProfile"
+    <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginBottom="15dp"
-        android:contentDescription="@string/user_profile"
-        app:srcCompat="@drawable/ic_account"
-        tools:ignore="VectorDrawableCompat" />
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="75dp"
+        app:cardElevation="0dp">
+        <ImageView
+            android:id="@+id/userProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/user_profile"
+            app:srcCompat="@drawable/ic_account"
+            tools:ignore="VectorDrawableCompat" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/userName"
