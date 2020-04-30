@@ -46,6 +46,34 @@
     <string name="setting_email">Email</string>
     <string name="setting_email_input" />
     <string name="setting_update">Update</string>
+    <string name="language">Language</string>
+    <string name="eat_and_ex_tab_bar">Eat/Ex Activity</string>
+    <string name="left_arrow_activity">left arrow</string>
+    <string name="activity_image">activity_image</string>
+    <string name="menu_activity">Menu</string>
+    <string name="menu_input" />
+    <string name="cal_act">Calories</string>
+    <string name="cal_act_input" />
+    <string name="location_act">Location</string>
+    <string name="okay_act_btn">OK</string>
+    <string name="loc_act_input" />
+    <string name="view_cal_day">Day</string>
+    <string name="view_cal_week">Week</string>
+    <string name="view_cal_month">Month</string>
+    <string name="day_title_view_day">Day:</string>
+    <string name="day_picker_view_day">Today</string>
+    <string name="editGoal_title">Update your goal for today</string>
+    <string name="editGoal_exLogo">editGoal_exLogo</string>
+    <string name="editGoal_ex_input" />
+    <string name="editGoal_ex_calPerDay">calories/day</string>
+    <string name="editGoal_foodLogo">editGoal_foodLogo</string>
+    <string name="editGoal_food_input" />
+    <string name="editGoal_food_calPerDay">calories/day</string>
+    <string name="editGoal_update_btn">Update</string>
+    <string name="viewWeek_month">Month: </string>
+    <string name="viewWeek_pickMonth">This month</string>
+    <string name="viewMonth_month">Month: </string>
+    <string name="viewMonth_pickMonth">This month</string>
 
     <string-array name="language_list">
         <item>English</item>

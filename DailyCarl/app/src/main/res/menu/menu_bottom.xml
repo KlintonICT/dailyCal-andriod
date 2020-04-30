@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/view_cal_day"
+        android:title="@string/view_cal_day"
+        android:icon="@drawable/day"/>
+    <item
+        android:id="@+id/view_cal_week"
+        android:title="@string/view_cal_week"
+        android:icon="@drawable/week"/>
+    <item
+        android:id="@+id/view_cal_month"
+        android:title="@string/view_cal_month"
+        android:icon="@drawable/month"/>
+</menu>

@@ -3,6 +3,8 @@
     package="com.example.dailycarl">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,12 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GoalActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".AddChoiceActivity" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".HandleDrawerNav" />
-        <activity android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui.GoalActivity" />
+        <activity android:name=".ui.SignupActivity" />
+        <activity android:name=".ui.AddChoiceActivity" />
+        <activity android:name=".ui.ViewCaloriesActivity" />
+        <activity android:name=".ui.SettingActivity" />
+        <activity android:name=".ui.EatAndExActivity" />
+        <activity android:name=".ui.HandleDrawerNav" />
+        <activity android:name=".ui.ViewCaloryMonth" />
+        <activity android:name=".ui.ViewCaloryWeek" />
+        <activity android:name=".ui.EditGoalActivity" />
+        <activity android:name=".ui.MainActivity" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
