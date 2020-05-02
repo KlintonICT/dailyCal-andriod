@@ -5,4 +5,5 @@
     <color name="colorAccent">#DCDB53</color>
     <color name="btnColor">#DCDB53</color>
     <color name="white">#FFFFFF</color>
+    <color name="btnDelete">#FA8072</color>
 </resources>

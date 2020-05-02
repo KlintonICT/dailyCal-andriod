@@ -115,8 +115,8 @@ class EatAndExActivity : AppCompatActivity() {
 
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(this)
-        pictureDialog.setTitle("Select Action")
-        val pictureDialogItems = arrayOf("Select image from gallery", "Capture photo from camera")
+        pictureDialog.setTitle("Choose photo from...")
+        val pictureDialogItems = arrayOf("Gallery", "Camera")
         pictureDialog.setItems(pictureDialogItems
         ) { _, which ->
             when (which) {

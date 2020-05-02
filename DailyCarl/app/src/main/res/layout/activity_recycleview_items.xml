@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_margin="6dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/recycle_item_card_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="30dp"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/recycle_item_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:contentDescription="@string/recycle_item_image"
+                android:src="@drawable/ex_logo" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/recycle_item_act_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/recycle_item_card_image"
+            android:text="@string/recycle_item_act_title"
+            android:textColor="#000"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/recycle_item_act_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/recycle_item_act_title"
+            android:text="@string/recycle_item_act_data"
+            android:textColor="#000"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/recycle_item_cal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recycle_item_act_title"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/recycle_item_card_image"
+            android:text="@string/recycle_item_cal_title"
+            android:textColor="#000"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/recycle_item_cal_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recycle_item_act_data"
+            android:layout_toEndOf="@+id/recycle_item_cal_title"
+            android:text="@string/recycle_item_cal_data"
+            android:textColor="#000"
+            android:layout_marginTop="7dp"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/recycle_item_place_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recycle_item_cal_title"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/recycle_item_card_image"
+            android:text="@string/recycle_item_place_title"
+            android:textColor="#000"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/recycle_item_place_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recycle_item_cal_data"
+            android:layout_toEndOf="@+id/recycle_item_place_title"
+            android:text="@string/recycle_item_place_data"
+            android:textColor="#000"
+            android:layout_marginTop="7dp"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/recycle_item_place_data"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/rounded_delete"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="5dp"
+            android:text="@string/delete"
+            android:textColor="#000"
+            android:textSize="13sp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
