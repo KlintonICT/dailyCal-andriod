@@ -8,7 +8,7 @@ data class ActivityDB(
     var activityCalory      : String? = "",
     var type                : String? = "",
     var location            : String? = "",
-    var activityPic         : String? = "",
     var date                : String? = "",
-    var goal                : String? = ""
+    var goal                : String? = "",
+    var activityPic         : String? = ""
 )

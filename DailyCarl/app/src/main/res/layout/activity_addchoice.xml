@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical">
+    android:layout_marginTop="60dp"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_marginTop="25dp"
-        android:id="@+id/add_eat_act_btn"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/activity_btn"
-        android:drawableTop="@drawable/food_act"
-        android:padding="70dp"
-        android:text="@string/add_eat_act_btn"
-        android:textColor="#000000"
-        android:drawablePadding="25dp"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_marginTop="20dp"
-        android:id="@+id/add_not_food_act"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:padding="40dp"
-        android:textAlignment="center"
-        android:drawablePadding="40dp"
-        android:background="@drawable/activity_btn"
-        android:drawableTop="@drawable/ex_act"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/add_not_food_act" />
+        <TextView
+            android:layout_marginTop="25dp"
+            android:id="@+id/add_eat_act_btn"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/activity_btn"
+            android:drawableTop="@drawable/food_act"
+            android:padding="70dp"
+            android:text="@string/add_eat_act_btn"
+            android:textColor="#000000"
+            android:drawablePadding="25dp"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
-</LinearLayout>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/add_not_food_act"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:padding="40dp"
+            android:textAlignment="center"
+            android:drawablePadding="40dp"
+            android:background="@drawable/activity_btn"
+            android:drawableTop="@drawable/ex_act"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/add_not_food_act" />
+    </LinearLayout>
+
+</ScrollView>

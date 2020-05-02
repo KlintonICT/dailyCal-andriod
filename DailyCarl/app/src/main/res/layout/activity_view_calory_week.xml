@@ -1,39 +1,452 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     tools:context=".ui.ViewCaloryWeek">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/viewWeek_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_weight="1"
+                android:textColor="#000"
+                android:gravity="center"
+                android:text="@string/viewWeek_month" />
+
+            <TextView
+                android:id="@+id/viewWeek_pickMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_weight="1"
+                android:textColor="#000"
+                android:textAlignment="center"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_input"
+                android:text="@string/viewWeek_pickMonth" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/viewWeek_month"
-            android:layout_width="wrap_content"
+            android:id="@+id/ex_act_week"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_weight="1"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
             android:textColor="#000"
-            android:gravity="center"
-            android:text="@string/viewWeek_month" />
+            android:layout_marginStart="10dp"
+            android:text="@string/ex_act_week" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TableRow android:background="#ADFF2F" android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_week_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:text="@string/viewWeek_ex_week_title" />
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_cal_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_cal_title"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_goal_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_goal_title"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </TableRow>
+
+            <TableRow android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:text="1"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_cal1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_cal1"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_goal1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_goal1"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="2"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_cal2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_cal2"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_goal2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_goal2"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="3"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_cal3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_cal3"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_goal3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_goal3"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="4"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_cal4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_cal4"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_goal4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_goal4"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="5"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_cal5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_cal5"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_ex_goal5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_ex_goal5"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+        </TableLayout>
 
         <TextView
-            android:id="@+id/viewWeek_pickMonth"
-            android:layout_width="wrap_content"
+            android:id="@+id/food_act_week"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_weight="1"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
             android:textColor="#000"
-            android:textAlignment="center"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/rounded_input"
-            android:text="@string/viewWeek_pickMonth" />
+            android:layout_marginStart="10dp"
+            android:text="@string/food_act_week" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:layout_marginTop="10dp">
+
+            <TableRow
+                android:background="#ADFF2F"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/viewWeek_food_week_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_week_title"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_food_cal_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_cal_title"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_food_goal_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_goal_title"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </TableRow>
+
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="1"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_food_cal1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_cal1"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_food_goal1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_goal1"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="2"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_food_cal2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_cal2"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_food_goal2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_goal2"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="3"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_food_cal3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_cal3"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_food_goal3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_goal3"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="4"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_food_cal4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_cal4"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_food_goal4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_goal4"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+            <TableRow android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="5"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/viewWeek_food_cal5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_cal5"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/viewWeek_food_goal5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/viewWeek_food_goal5"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+        </TableLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

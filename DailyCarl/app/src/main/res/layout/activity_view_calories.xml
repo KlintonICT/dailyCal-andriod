@@ -10,55 +10,168 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/day_title_view_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/day_title_view_day"
+                android:textColor="#000"
+                android:textSize="25sp"
+                tools:text="@string/day_title_view_day" />
+
+            <TextView
+                android:id="@+id/day_picker_view_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_input"
+                android:text="@string/day_picker_view_day"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/day_title_view_day"
+                    android:id="@+id/viewCal_ex_gaol_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/day_title_view_day"
+                    android:textSize="18sp"
                     android:textColor="#000"
-                    android:textSize="25sp"
-                    tools:text="@string/day_title_view_day" />
+                    android:layout_marginStart="20dp"
+                    android:text="@string/viewCal_ex_gaol_title" />
 
                 <TextView
-                    android:id="@+id/day_picker_view_day"
+                    android:id="@+id/viewCal_ex_gaol_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_input"
-                    android:text="@string/day_picker_view_day"
-                    android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textColor="#000"
-                    android:textSize="25sp" />
+                    android:layout_marginStart="50dp"
+                    android:text="@string/viewCal_ex_gaol_data" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/pieChart"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="40dp">
-                </com.github.mikephil.charting.charts.PieChart>
+                <TextView
+                    android:id="@+id/viewCal_ex_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:text="@string/viewCal_ex_title" />
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/pieChartFood"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="60dp">
-                </com.github.mikephil.charting.charts.PieChart>
+                <TextView
+                    android:id="@+id/viewCal_ex_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/viewCal_ex_data" />
+
             </LinearLayout>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="40dp">
+
+            </com.github.mikephil.charting.charts.PieChart>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/viewCal_food_goal_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/viewCal_food_goal_title" />
+
+                <TextView
+                    android:id="@+id/viewCal_food_goal_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:layout_marginStart="50dp"
+                    android:text="@string/viewCal_goal_data" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/viewCal_food_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/viewCal_food_title" />
+
+                <TextView
+                    android:id="@+id/viewCal_food_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:layout_marginStart="22dp"
+                    android:text="@string/viewCal_food_data" />
+
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChartFood"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp">
+            </com.github.mikephil.charting.charts.PieChart>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginBottom="60dp"
+            android:clipToPadding="false"
+            tools:listitem="@layout/activity_recycleview_items"/>
     </LinearLayout>
 </ScrollView>

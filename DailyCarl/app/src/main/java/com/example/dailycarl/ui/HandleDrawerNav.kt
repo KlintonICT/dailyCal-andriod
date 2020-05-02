@@ -12,10 +12,13 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.ui.AppBarConfiguration
-import com.example.dailycarl.*
+import com.example.dailycarl.R
+import com.example.dailycarl.database.UserDB
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 
 class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,12 +26,17 @@ class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSele
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
     lateinit var bottomView: BottomNavigationView
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private var bottomPage = 0
+    var mAuth: FirebaseAuth? = null
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.handle_drawer_nav)
+
+        mAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
+        handleHeaderDrawerNav()
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -48,6 +56,23 @@ class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSele
         bottomView.visibility = View.GONE
         navView.setNavigationItemSelectedListener(this)
         bottomView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+    }
+
+    private fun handleHeaderDrawerNav(){
+        var navigationView = findViewById<NavigationView>(R.id.nav_view);
+        var headerView = navigationView.getHeaderView(0)
+        var username = headerView.findViewById<TextView>(R.id.header_nav_username)
+        var userId = ""
+        var currentUser = mAuth!!.currentUser
+        currentUser?.let { userId = currentUser.uid }
+        database.child("Users").child(userId)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val userDB = dataSnapshot.getValue<UserDB>()
+                    username.text = userDB!!.username.toString()
+                }
+            })
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
