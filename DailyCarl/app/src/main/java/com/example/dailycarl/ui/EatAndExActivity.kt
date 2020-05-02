@@ -1,5 +1,6 @@
 package com.example.dailycarl.ui
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
@@ -7,12 +8,18 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dailycarl.R
+import com.example.dailycarl.database.ActivityDB
+import com.example.dailycarl.database.UserDB
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -24,6 +31,12 @@ class EatAndExActivity : AppCompatActivity() {
     private var imageView: ImageView? = null
     private val GALLERY = 1
     private val CAMERA = 2
+    var mAuth: FirebaseAuth? = null
+    private lateinit var database: DatabaseReference
+    private lateinit var menu   : EditText
+    private lateinit var calory : EditText
+    private lateinit var location: EditText
+    private lateinit var okBtn  : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +45,15 @@ class EatAndExActivity : AppCompatActivity() {
         val activityType:String = intent.getStringExtra("activityType")
         val activityBar         = findViewById<TextView>(R.id.eat_and_act_tab_bar)
         val backBtn             = findViewById<ImageView>(R.id.left_arrow)
-        val okBtn               = findViewById<TextView>(R.id.ok_act_btn)
-        imageView               = findViewById<ImageView>(R.id.activity_image)
+        val pickDay             = findViewById<TextView>(R.id.date_act_picker)
+            menu                = findViewById(R.id.menu_input)
+            calory              = findViewById(R.id.cal_act_input)
+            location            = findViewById(R.id.location_input)
+            okBtn               = findViewById(R.id.ok_act_btn)
+        imageView               = findViewById(R.id.activity_image)
+
+        mAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
 
         imageView!!.setOnClickListener{ showPictureDialog() }
 
@@ -45,7 +65,52 @@ class EatAndExActivity : AppCompatActivity() {
             activityBar.text = "Exercise Activity"
         }
 
-        okBtn.setOnClickListener { startActivity(Intent(this@EatAndExActivity, HandleDrawerNav::class.java)) }
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        pickDay.setOnClickListener {
+            DatePickerDialog(this, DatePickerDialog.OnDateSetListener{ _, mYear, mMonth, mDay ->
+                pickDay.text = "" + mDay + "/" + (mMonth+1) + "/" + mYear
+                handleOkayButton("" + mDay + "/" + (mMonth+1) + "/" + mYear, activityType)
+            }, year, month, day).show()
+        }
+    }
+
+    private fun handleOkayButton(date: String, actType: String) {
+        okBtn.setOnClickListener {
+            val menuField      = menu.text.toString().trim{ it <= ' ' }
+            val caloryField    = calory.text.toString().trim{ it <= ' ' }
+            val locationField = location.text.toString()
+            if(menuField.isEmpty()){
+                Toast.makeText(applicationContext, "Please enter your activity.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if(caloryField.isEmpty()){
+                Toast.makeText(applicationContext, "Please enter calory for this activity.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            var userId = ""
+            var currentUser = mAuth!!.currentUser
+            currentUser?.let { userId = currentUser.uid }
+            database.child("Users").child(userId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val userDB = dataSnapshot.getValue<UserDB>()
+                        var defaultGoal = ""
+                        if(userDB != null && actType == "ex"){
+                            defaultGoal = userDB.defaultExGoal.toString()
+                        }
+                        if(userDB != null && actType == "eat"){
+                            defaultGoal = userDB.defaultFoodGoal.toString()
+                        }
+                        val activity = ActivityDB(menuField, caloryField, actType, locationField, date, defaultGoal)
+                        database.child("Users").child(userId).child("usersActivity").push().setValue(activity)
+                    }
+                })
+            startActivity(Intent(this@EatAndExActivity, HandleDrawerNav::class.java))
+        }
     }
 
     private fun showPictureDialog() {

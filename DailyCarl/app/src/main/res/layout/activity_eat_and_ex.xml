@@ -67,14 +67,15 @@
 
             <EditText
                 android:id="@+id/menu_input"
-                android:layout_width="wrap_content"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:ems="10"
                 android:hint="@string/menu_input"
                 android:paddingVertical="5dp"
+                android:textAlignment="center"
                 android:paddingHorizontal="20dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:background="@drawable/rounded_input"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName" />
@@ -98,17 +99,18 @@
 
             <EditText
                 android:id="@+id/cal_act_input"
-                android:layout_width="wrap_content"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="40dp"
                 android:background="@drawable/rounded_input"
                 android:ems="10"
-                android:textSize="20sp"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="20dp"
                 android:hint="@string/cal_act_input"
-                android:inputType="textPersonName"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -128,18 +130,49 @@
                 android:text="@string/location_act" />
 
             <EditText
-                android:id="@+id/editText"
-                android:layout_width="wrap_content"
+                android:id="@+id/location_input"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
                 android:background="@drawable/rounded_input"
                 android:ems="10"
-                android:textSize="20sp"
+                android:hint="@string/loc_act_input"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="5dp"
-                android:layout_marginStart="30dp"
-                android:hint="@string/loc_act_input"
-                android:inputType="textPersonName" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/date_act"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_marginStart="20dp"
+                android:text="@string/day_act" />
+
+            <TextView
+                android:id="@+id/date_act_picker"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_marginStart="78dp"
+                android:paddingVertical="5dp"
+                android:textAlignment="center"
+                android:background="@drawable/rounded_input"
+                android:text="@string/day_act_picker" />
 
         </LinearLayout>
 

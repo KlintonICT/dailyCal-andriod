@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(signup_page)
         }
 
+        println("Hello my name i sklinto how aobu tkd fksdfs")
+        Log.d("Hsddl", "Hello my nME ISKDKLAD F")
+
         mAuth = FirebaseAuth.getInstance()
 
 //        if(mAuth!!.currentUser != null) {

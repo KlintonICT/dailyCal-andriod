@@ -8,16 +8,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.dailycarl.R
+import com.example.dailycarl.database.ActivityDB
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ViewCaloriesActivity : Fragment() {
+
+    var mAuth: FirebaseAuth? = null
+    private lateinit var database: DatabaseReference
 
     companion object {
         fun newInstance(): Fragment {
@@ -36,25 +43,55 @@ class ViewCaloriesActivity : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val viewRoot = inflater.inflate(R.layout.activity_view_calories, container, false)
+        mAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
         var pickDay = viewRoot.findViewById<TextView>(R.id.day_picker_view_day)
-        pickDay.text = "" + day + "/" + (month+1) + "/" + year
+        val currentDate = "" + day + "/" + (month+1) + "/" + year
+        pickDay.text = currentDate
+        calculation(currentDate, viewRoot)
         pickDay.setOnClickListener {
             activity?.let { it1 ->
                 DatePickerDialog(it1, DatePickerDialog.OnDateSetListener{ _, mYear, mMonth, mDay ->
                     pickDay.text = "" + mDay + "/" + (mMonth+1) + "/" + mYear
+                    calculation("" + mDay + "/" + (mMonth+1) + "/" + mYear, viewRoot)
                 }, year, month, day)
             }?.show()
         }
-        exercisePieChart(viewRoot)
-        foodPieChart(viewRoot)
         return viewRoot
     }
 
-    private fun exercisePieChart (viewRoot: View){
+    private fun calculation(date: String, viewRoot: View){
+        var userId = ""
+        var currentUser = mAuth!!.currentUser
+        currentUser?.let { userId = currentUser.uid }
+        database.child("Users").child(userId).child("usersActivity")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var totalFood = 0.0; var totalEx = 0.0
+                    var goalFood = 0.0; var goalEx = 0.0
+                    for(snapShot in dataSnapshot.children){
+                        val activityDB = snapShot.getValue<ActivityDB>()
+                        if(activityDB != null && activityDB.type.toString() == "ex" && activityDB.date.toString() == date){
+                            goalEx = activityDB.goal.toString().toDouble()
+                            totalEx += activityDB.activityCalory.toString().toDouble()
+                        }
+                        if(activityDB != null && activityDB.type.toString() == "eat" && activityDB.date.toString() == date){
+                            goalFood = activityDB.goal.toString().toDouble()
+                            totalFood += activityDB.activityCalory.toString().toDouble()
+                        }
+                        exercisePieChart(viewRoot, totalEx, goalEx)
+                        foodPieChart(viewRoot, totalFood, goalFood)
+                    }
+                }
+            })
+    }
+
+    private fun exercisePieChart (viewRoot: View, exCal: Double, exGoal: Double){
         val pieChart = viewRoot.findViewById<PieChart>(R.id.pieChart)
         pieChart.setUsePercentValues(true)
         pieChart.holeRadius = 0f
@@ -64,8 +101,20 @@ class ViewCaloriesActivity : Fragment() {
         pieChart.description = desc
 
         var value = ArrayList<PieEntry>()
-        value.add(PieEntry(40f, "Goal"))
-        value.add(PieEntry(60f, "Exercise"))
+        if(exCal == 0.0 && exGoal == 0.0){
+            value.add(PieEntry(100f, "Goal"))
+            value.add(PieEntry(0f, "Exercise"))
+        }
+        if(exCal > exGoal){
+            value.add(PieEntry(0f, "Goal"))
+            value.add(PieEntry(100f, "Exercise"))
+        }
+        if(exCal != 0.0 && exGoal != 0.0 && exCal <= exGoal){
+            val exCalPercent = (exCal.toFloat() / exGoal.toFloat()) * 100
+            val exGaolPercent = 100 - exCalPercent
+            value.add(PieEntry(exGaolPercent, "Goal"))
+            value.add(PieEntry(exCalPercent, "Exercise"))
+        }
 
         var pieDataSet = PieDataSet(value, "Calories(%)")
         pieDataSet.valueTextSize = 20f
@@ -75,7 +124,7 @@ class ViewCaloriesActivity : Fragment() {
         pieChart.animateXY(1500, 1500)
     }
 
-    private fun foodPieChart(viewRoot: View){
+    private fun foodPieChart(viewRoot: View, foodCal: Double, foodGoal: Double){
         val pieChart = viewRoot.findViewById<PieChart>(R.id.pieChartFood)
         pieChart.setUsePercentValues(true)
         pieChart.holeRadius = 0f
@@ -85,8 +134,20 @@ class ViewCaloriesActivity : Fragment() {
         pieChart.description = desc
 
         var value = ArrayList<PieEntry>()
-        value.add(PieEntry(50f, "Goal"))
-        value.add(PieEntry(50f, "Food"))
+        if(foodCal == 0.0 && foodGoal == 0.0){
+            value.add(PieEntry(100f, "Goal"))
+            value.add(PieEntry(0f, "Food"))
+        }
+        if(foodCal > foodGoal){
+            value.add(PieEntry(0f, "Goal"))
+            value.add(PieEntry(100f, "Food"))
+        }
+        if(foodCal != 0.0 && foodGoal != 0.0 && foodCal <= foodGoal){
+            val foodCalPercent = (foodCal.toFloat() / foodGoal.toFloat()) * 100
+            val foodGoalPercent = 100 - foodCalPercent
+            value.add(PieEntry(foodGoalPercent, "Goal"))
+            value.add(PieEntry(foodCalPercent, "Food"))
+        }
 
         var pieDataSet = PieDataSet(value, "Calories(%)")
         pieDataSet.valueTextSize = 20f

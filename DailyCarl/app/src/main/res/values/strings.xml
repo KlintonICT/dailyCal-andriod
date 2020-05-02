@@ -74,6 +74,8 @@
     <string name="viewWeek_pickMonth">This month</string>
     <string name="viewMonth_month">Month: </string>
     <string name="viewMonth_pickMonth">This month</string>
+    <string name="day_act">Day</string>
+    <string name="day_act_picker">Choose your day</string>
 
     <string-array name="language_list">
         <item>English</item>

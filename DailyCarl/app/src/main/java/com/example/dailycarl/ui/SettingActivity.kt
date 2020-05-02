@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -15,6 +16,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.dailycarl.R
 import com.example.dailycarl.database.UserDB
@@ -27,6 +29,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class SettingActivity : Fragment() {
@@ -36,6 +39,7 @@ class SettingActivity : Fragment() {
     private var imageView: ImageView? = null
     private val GALLERY = 1
     private val CAMERA = 2
+    lateinit var capturePhotoPath: String
 
     companion object {
         fun newInstance(): Fragment {
@@ -85,8 +89,8 @@ class SettingActivity : Fragment() {
 
         updateBtn.setOnClickListener {
             val name  = settingNameInput.text.toString()
-            val email = settingNameInput.text.toString()
-            Toast.makeText(activity, email, Toast.LENGTH_LONG).show()
+            val email = settingEmailInput.text.toString()
+            Toast.makeText(activity, "Waiting for updating...", Toast.LENGTH_LONG).show()
             if(name.isEmpty()) { Toast.makeText(activity, "Please enter your name.", Toast.LENGTH_SHORT).show(); return@setOnClickListener}
             if(email.isEmpty()) { Toast.makeText(activity, "Please enter your email address.", Toast.LENGTH_SHORT).show(); return@setOnClickListener }
             database.child("Users").child(userId)
@@ -104,6 +108,7 @@ class SettingActivity : Fragment() {
                                         if (task.isSuccessful) {
                                             database.child("Users").child(userId).child("username").setValue(name)
                                             database.child("Users").child(userId).child("userEmail").setValue(email)
+                                            Toast.makeText(activity, "Updated Successfully.", Toast.LENGTH_SHORT).show()
                                             startActivity(Intent(activity, HandleDrawerNav::class.java))
                                         }else{
                                             Toast.makeText(activity, "Updating Fail", Toast.LENGTH_SHORT).show()
@@ -139,6 +144,28 @@ class SettingActivity : Fragment() {
     private fun takePhotoFromCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, CAMERA)
+//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+//            // Ensure that there's a camera activity to handle the intent
+//            takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
+//                // Create the File where the photo should go
+//                val photoFile: File? = try {
+//                    createImageFile()
+//                } catch (ex: IOException) {
+//                    // Error occurred while creating the File
+//                    null
+//                }
+//                // Continue only if the File was successfully created
+//                photoFile?.also {it ->
+//                    val photoURI: Uri = FileProvider.getUriForFile(
+//                        activity!!.applicationContext,
+//                        "com.example.android.fileprovider",
+//                        it
+//                    )
+//                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+//                    startActivityForResult(takePictureIntent, CAMERA)
+//                }
+//            }
+//        }
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -151,7 +178,7 @@ class SettingActivity : Fragment() {
                 val contentURI = data!!.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
-                    saveImage(bitmap)
+//                    saveImage(bitmap)
                     imageView!!.setImageBitmap(bitmap)
                 }
                 catch (e: IOException)
@@ -164,39 +191,54 @@ class SettingActivity : Fragment() {
         {
             val thumbnail = data!!.extras!!.get("data") as Bitmap
             imageView!!.setImageBitmap(thumbnail)
-            saveImage(thumbnail)
+//            saveImage(thumbnail)
         }
     }
 
-    private fun saveImage(myBitmap: Bitmap):String {
-        val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val wallpaperDirectory = File (
-            (Environment.getExternalStorageDirectory()).toString() + "/Photos")
-        Log.d("fee", wallpaperDirectory.toString())
-        if (!wallpaperDirectory.exists())
-        {
-            wallpaperDirectory.mkdirs()
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File? = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            capturePhotoPath = "file:$absolutePath"
         }
-        try
-        {
-            Log.d("heel", wallpaperDirectory.toString())
-            val f = File(wallpaperDirectory, ((Calendar.getInstance()
-                .timeInMillis).toString() + ".png"))
-            f.createNewFile()
-            val fo = FileOutputStream(f)
-            fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(activity, arrayOf(f.path), arrayOf("image/png"), null)
-            fo.close()
-            Log.d("TAG", "File Saved::--->" + f.absolutePath)
-
-            return f.absolutePath
-        }
-        catch (e1: IOException){
-            e1.printStackTrace()
-        }
-        return ""
     }
+
+//    private fun saveImage(myBitmap: Bitmap):String {
+//        val bytes = ByteArrayOutputStream()
+//        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+//        val wallpaperDirectory = File (
+//            (Environment.getExternalStorageDirectory()).toString() + "/Photos")
+//        Log.d("fee", wallpaperDirectory.toString())
+//        if (!wallpaperDirectory.exists())
+//        {
+//            wallpaperDirectory.mkdirs()
+//        }
+//        try
+//        {
+//            Log.d("heel", wallpaperDirectory.toString())
+//            val f = File(wallpaperDirectory, ((Calendar.getInstance()
+//                .timeInMillis).toString() + ".png"))
+//            f.createNewFile()
+//            val fo = FileOutputStream(f)
+//            fo.write(bytes.toByteArray())
+//            MediaScannerConnection.scanFile(activity, arrayOf(f.path), arrayOf("image/png"), null)
+//            fo.close()
+//            Log.d("TAG", "File Saved::--->" + f.absolutePath)
+//
+//            return f.absolutePath
+//        }
+//        catch (e1: IOException){
+//            e1.printStackTrace()
+//        }
+//        return ""
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

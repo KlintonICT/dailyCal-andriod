@@ -50,7 +50,7 @@
             android:paddingHorizontal="20dp"
             android:layout_marginHorizontal="20dp"
             android:paddingVertical="10dp"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:inputType="number" />
 
         <TextView
@@ -89,6 +89,7 @@
             android:ems="10"
             android:hint="@string/editGoal_food_input"
             android:inputType="number"
+            android:textSize="20sp"
             android:importantForAutofill="no" />
 
         <TextView
