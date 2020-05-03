@@ -1,5 +1,6 @@
 package com.example.dailycarl.ui
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.dailycarl.R
+import com.example.dailycarl.helper.ContextWrapper
+import com.example.dailycarl.helper.Preference
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -17,6 +20,7 @@ class GoalActivity : AppCompatActivity() {
     private val TAG: String = "Goal Activity"
     var mAuth: FirebaseAuth? = null
     private lateinit var database: DatabaseReference
+    lateinit var preference: Preference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,5 +57,11 @@ class GoalActivity : AppCompatActivity() {
             startActivity(Intent(this@GoalActivity, AddChoiceActivity::class.java))
             finish()
         }
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        preference = Preference(newBase!!)
+        val lang = preference.getLoginCount()
+        super.attachBaseContext(lang?.let { ContextWrapper.wrap(newBase, it) })
     }
 }

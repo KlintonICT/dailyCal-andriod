@@ -1,6 +1,7 @@
 package com.example.dailycarl.ui
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
@@ -17,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.dailycarl.R
 import com.example.dailycarl.database.ActivityDB
 import com.example.dailycarl.database.UserDB
+import com.example.dailycarl.helper.ContextWrapper
+import com.example.dailycarl.helper.Preference
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -37,6 +40,7 @@ class EatAndExActivity : AppCompatActivity() {
     private lateinit var calory : EditText
     private lateinit var location: EditText
     private lateinit var okBtn  : TextView
+    lateinit var preference: Preference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +64,9 @@ class EatAndExActivity : AppCompatActivity() {
         backBtn.setOnClickListener{ startActivity(Intent(this@EatAndExActivity, HandleDrawerNav::class.java)) }
 
         if( activityType != null && activityType == "eat" ){
-            activityBar.text = "Eat Activity"
+            activityBar.text = getString(R.string.eat_activity_exfood)
         }else if(activityType != null && activityType == "ex"){
-            activityBar.text = "Exercise Activity"
+            activityBar.text = getString(R.string.ex_activity_exfood)
         }
 
         val c = Calendar.getInstance()
@@ -198,5 +202,11 @@ class EatAndExActivity : AppCompatActivity() {
 
     companion object {
         private const val IMAGE_DIRECTORY = "/Photos"
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        preference = Preference(newBase!!)
+        val lang = preference.getLoginCount()
+        super.attachBaseContext(lang?.let { ContextWrapper.wrap(newBase, it) })
     }
 }

@@ -1,5 +1,6 @@
 package com.example.dailycarl.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -14,6 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.dailycarl.R
 import com.example.dailycarl.database.UserDB
+import com.example.dailycarl.helper.ContextWrapper
+import com.example.dailycarl.helper.Preference
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -29,6 +32,7 @@ class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSele
     private var bottomPage = 0
     var mAuth: FirebaseAuth? = null
     private lateinit var database: DatabaseReference
+    private lateinit var preference: Preference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,21 +91,21 @@ class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 bottomView.visibility = View.VISIBLE
                 when(bottomPage){
                     0 -> {
-                        navTitle.text = "Day"
+                        navTitle.text = getString(R.string.day)
                         navigateToFragment(ViewCaloriesActivity.newInstance())
                     }
                     1 -> {
-                        navTitle.text = "Week"
+                        navTitle.text = getString(R.string.week)
                         navigateToFragment(ViewCaloryWeek.newInstance())
                     }
                     2 -> {
-                        navTitle.text = "Month"
+                        navTitle.text = getString(R.string.month)
                         navigateToFragment(ViewCaloryMonth.newInstance())
                     }
                 }
             }
             R.id.nav_editGoal -> {
-                navTitle.text = "Change Goal"
+                navTitle.text = getString(R.string.change_goal)
                 bottomView.visibility = View.GONE
                 navigateToFragment(EditGoalActivity.newInstance())
             }
@@ -124,19 +128,19 @@ class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSele
         item.isChecked = true
         when (item.itemId) {
             R.id.view_cal_day -> {
-                navTitle.text = "Day"
+                navTitle.text = getString(R.string.day)
                 bottomPage = 0
                 drawerLayout.closeDrawer(GravityCompat.START)
                 navigateToFragment(ViewCaloriesActivity.newInstance())
             }
             R.id.view_cal_week -> {
-                navTitle.text = "Week"
+                navTitle.text = getString(R.string.week)
                 bottomPage = 1
                 drawerLayout.closeDrawer(GravityCompat.START)
                 navigateToFragment(ViewCaloryWeek.newInstance())
             }
             R.id.view_cal_month -> {
-                navTitle.text = "Month"
+                navTitle.text = getString(R.string.month)
                 bottomPage = 2
                 drawerLayout.closeDrawer(GravityCompat.START)
                 navigateToFragment(ViewCaloryMonth.newInstance())
@@ -151,5 +155,11 @@ class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSele
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        preference = Preference(newBase!!)
+        val lang = preference.getLoginCount()
+        super.attachBaseContext(lang?.let { ContextWrapper.wrap(newBase, it) })
     }
 }

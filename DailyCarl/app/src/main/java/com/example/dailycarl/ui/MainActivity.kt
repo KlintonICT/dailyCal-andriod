@@ -1,5 +1,6 @@
 package com.example.dailycarl.ui
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,11 +10,14 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import android.widget.Toast
 import com.example.dailycarl.R
+import com.example.dailycarl.helper.ContextWrapper
+import com.example.dailycarl.helper.Preference
 
 class MainActivity : AppCompatActivity() {
 
     var mAuth: FirebaseAuth? = null
     private val TAG: String = "Login Activity"
+    private lateinit var preference: Preference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,5 +71,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        preference = Preference(newBase!!)
+        val lang = preference.getLoginCount()
+        super.attachBaseContext(lang?.let { ContextWrapper.wrap(newBase, it) })
     }
 }

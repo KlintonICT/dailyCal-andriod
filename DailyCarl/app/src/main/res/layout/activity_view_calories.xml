@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginStart="20dp"
                     android:text="@string/viewCal_ex_gaol_title" />
 
@@ -66,7 +67,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000"
-                    android:layout_marginStart="50dp"
                     android:text="@string/viewCal_ex_gaol_data" />
 
             </LinearLayout>
@@ -85,6 +85,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000"
+                    android:layout_marginEnd="10dp"
                     android:text="@string/viewCal_ex_title" />
 
                 <TextView
@@ -93,7 +94,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000"
-                    android:layout_marginStart="20dp"
                     android:text="@string/viewCal_ex_data" />
 
             </LinearLayout>
@@ -118,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginStart="20dp"
                     android:text="@string/viewCal_food_goal_title" />
 
@@ -127,7 +128,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000"
-                    android:layout_marginStart="50dp"
                     android:text="@string/viewCal_goal_data" />
             </LinearLayout>
 
@@ -143,6 +143,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginStart="20dp"
                     android:text="@string/viewCal_food_title" />
 
@@ -152,7 +153,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textColor="#000"
-                    android:layout_marginStart="22dp"
                     android:text="@string/viewCal_food_data" />
 
             </LinearLayout>

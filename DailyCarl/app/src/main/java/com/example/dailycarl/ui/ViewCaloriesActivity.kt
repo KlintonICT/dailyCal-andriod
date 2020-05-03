@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dailycarl.R
 import com.example.dailycarl.database.ActivityDB
 import com.example.dailycarl.database.RecycleviewDB
+import com.example.dailycarl.helper.RecycleViewAdapter
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
@@ -21,7 +22,6 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
-import kotlinx.android.synthetic.main.activity_view_calories.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -84,15 +84,18 @@ class ViewCaloriesActivity : Fragment() {
                         val activityDB = snapShot.getValue<ActivityDB>()
                         if(activityDB!!.type.toString() == "ex" && activityDB!!.date.toString() == date){
                             recycleList += RecycleviewDB(R.drawable.ex_logo,
-                                "Exercise: ", activityDB!!.menu.toString(), activityDB!!.activityCalory.toString(), activityDB!!.location.toString())
+                                getString(R.string.ex), activityDB!!.menu.toString(), activityDB!!.activityCalory.toString(), activityDB!!.location.toString())
                         }
                         if(activityDB!!.type.toString() == "eat" && activityDB!!.date.toString() == date){
                             recycleList += RecycleviewDB(R.drawable.food_logo,
-                                "Food: ", activityDB!!.menu.toString(), activityDB!!.activityCalory.toString(), activityDB!!.location.toString())
+                                getString(R.string.food), activityDB!!.menu.toString(), activityDB!!.activityCalory.toString(), activityDB!!.location.toString())
                         }
                     }
                     val recycleView = viewRoot.findViewById<RecyclerView>(R.id.recycle_view)
-                    recycleView.adapter = RecycleViewAdapter(recycleList)
+                    recycleView.adapter =
+                        RecycleViewAdapter(
+                            recycleList
+                        )
                     recycleView.layoutManager = LinearLayoutManager(activity?.applicationContext)
                     recycleView.setHasFixedSize(true)
                 }
