@@ -25,10 +25,6 @@ class ViewCaloryWeek : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -123,9 +119,5 @@ class ViewCaloryWeek : Fragment() {
             foodCal[i].text  = totalFood[i].toString()
             foodGoal[i].text = totalFoodGoal[i].toString()
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 }

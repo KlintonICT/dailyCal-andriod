@@ -2,9 +2,12 @@ package com.example.dailycarl.ui
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -66,6 +69,7 @@ class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSele
         var navigationView = findViewById<NavigationView>(R.id.nav_view);
         var headerView = navigationView.getHeaderView(0)
         var username = headerView.findViewById<TextView>(R.id.header_nav_username)
+        var profile = headerView.findViewById<ImageView>(R.id.userProfile)
         var userId = ""
         var currentUser = mAuth!!.currentUser
         currentUser?.let { userId = currentUser.uid }
@@ -75,6 +79,11 @@ class HandleDrawerNav : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val userDB = dataSnapshot.getValue<UserDB>()
                     username.text = userDB!!.username.toString()
+                    if(userDB!!.profilePic.toString().isNotEmpty()){
+                        val img = Base64.decode(userDB!!.profilePic.toString(), Base64.DEFAULT)
+                        val image = BitmapFactory.decodeByteArray(img, 0, img.size)
+                        profile.setImageBitmap(image)
+                    }
                 }
             })
     }

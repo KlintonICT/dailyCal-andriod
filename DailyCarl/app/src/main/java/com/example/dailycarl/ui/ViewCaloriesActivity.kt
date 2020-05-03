@@ -36,11 +36,6 @@ class ViewCaloriesActivity : Fragment(){
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -84,11 +79,11 @@ class ViewCaloriesActivity : Fragment(){
                         val activityDB = snapShot.getValue<ActivityDB>()
                         val key = snapShot.key.toString()
                         if(activityDB!!.type.toString() == "ex" && activityDB!!.date.toString() == date){
-                            recycleList += RecycleviewDB(key, R.drawable.ex_logo,
+                            recycleList += RecycleviewDB(key, activityDB!!.activityPic.toString(), "ex",
                                 getString(R.string.ex), activityDB!!.menu.toString(), activityDB!!.activityCalory.toString(), activityDB!!.location.toString())
                         }
                         if(activityDB!!.type.toString() == "eat" && activityDB!!.date.toString() == date){
-                            recycleList += RecycleviewDB(key, R.drawable.food_logo,
+                            recycleList += RecycleviewDB(key, activityDB!!.activityPic.toString(), "eat",
                                 getString(R.string.food), activityDB!!.menu.toString(), activityDB!!.activityCalory.toString(), activityDB!!.location.toString())
                         }
                     }
@@ -202,7 +197,4 @@ class ViewCaloriesActivity : Fragment(){
         pieChart.animateXY(1500, 1500)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

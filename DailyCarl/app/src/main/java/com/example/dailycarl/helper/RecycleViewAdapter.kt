@@ -1,5 +1,7 @@
 package com.example.dailycarl.helper
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +30,16 @@ class RecycleViewAdapter(private val recycleList: ArrayList<RecycleviewDB>)  : R
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val currentItem = recycleList[position]
-        holder.imageAct.setImageResource(currentItem.imageResource)
+        if(currentItem.imageResource.isNotEmpty()){
+            val img = Base64.decode(currentItem.imageResource, Base64.DEFAULT)
+            val image = BitmapFactory.decodeByteArray(img, 0, img.size)
+            holder.imageAct.setImageBitmap(image)
+        }else{
+            when(currentItem.type){
+                "eat" -> holder.imageAct.setImageResource(R.drawable.food_logo)
+                "ex" -> holder.imageAct.setImageResource(R.drawable.ex_logo)
+            }
+        }
         holder.actTitle.text = currentItem.activityTitle
         holder.actData.text  = currentItem.activityData
         holder.cal.text      = currentItem.calories

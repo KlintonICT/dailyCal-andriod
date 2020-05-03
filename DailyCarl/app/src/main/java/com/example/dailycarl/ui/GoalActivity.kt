@@ -35,7 +35,7 @@ class GoalActivity : AppCompatActivity() {
 
         submitGoal.setOnClickListener {
             val ex   = goalEx.text.toString().trim { it <= ' ' }
-            val food = goalEx.text.toString().trim{ it <= ' '}
+            val food = goalFood.text.toString().trim{ it <= ' '}
 
             if(ex.isEmpty()) {
                 Toast.makeText(applicationContext, "Please enter your activity goal", Toast.LENGTH_SHORT).show()
