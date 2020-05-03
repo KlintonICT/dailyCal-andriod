@@ -8,6 +8,7 @@ import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
@@ -41,6 +42,7 @@ class EatAndExActivity : AppCompatActivity() {
     private lateinit var location: EditText
     private lateinit var okBtn  : TextView
     lateinit var preference: Preference
+    var capturePhotoPath = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,9 +66,9 @@ class EatAndExActivity : AppCompatActivity() {
         backBtn.setOnClickListener{ startActivity(Intent(this@EatAndExActivity, HandleDrawerNav::class.java)) }
 
         if( activityType != null && activityType == "eat" ){
-            activityBar.text = getString(R.string.eat_activity_exfood)
-        }else if(activityType != null && activityType == "ex"){
             activityBar.text = getString(R.string.ex_activity_exfood)
+        }else if(activityType != null && activityType == "ex"){
+            activityBar.text = getString(R.string.eat_activity_exfood)
         }
 
         val c = Calendar.getInstance()
@@ -109,7 +111,7 @@ class EatAndExActivity : AppCompatActivity() {
                         if(userDB != null && actType == "eat"){
                             defaultGoal = userDB.defaultFoodGoal.toString()
                         }
-                        val activity = ActivityDB(menuField, caloryField, actType, locationField, date, defaultGoal)
+                        val activity = ActivityDB(menuField, caloryField, actType, locationField, date, defaultGoal, capturePhotoPath)
                         database.child("Users").child(userId).child("usersActivity").push().setValue(activity)
                     }
                 })
@@ -143,7 +145,6 @@ class EatAndExActivity : AppCompatActivity() {
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == GALLERY)
         {
             if (data != null)
@@ -169,39 +170,10 @@ class EatAndExActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveImage(myBitmap: Bitmap):String {
+    private fun saveImage(myBitmap: Bitmap) {
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val wallpaperDirectory = File (
-            (Environment.getExternalStorageDirectory()).toString() + IMAGE_DIRECTORY
-        )
-        Log.d("fee", wallpaperDirectory.toString())
-        if (!wallpaperDirectory.exists())
-        {
-            wallpaperDirectory.mkdirs()
-        }
-        try
-        {
-            Log.d("heel", wallpaperDirectory.toString())
-            val f = File(wallpaperDirectory, ((Calendar.getInstance()
-                .timeInMillis).toString() + ".png"))
-            f.createNewFile()
-            val fo = FileOutputStream(f)
-            fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(this, arrayOf(f.path), arrayOf("image/png"), null)
-            fo.close()
-            Log.d("TAG", "File Saved::--->" + f.absolutePath)
-
-            return f.absolutePath
-        }
-        catch (e1: IOException){
-            e1.printStackTrace()
-        }
-        return ""
-    }
-
-    companion object {
-        private const val IMAGE_DIRECTORY = "/Photos"
+        capturePhotoPath = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT)
     }
 
     override fun attachBaseContext(newBase: Context?) {

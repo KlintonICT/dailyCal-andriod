@@ -27,10 +27,6 @@ class EditGoalActivity : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -99,9 +95,5 @@ class EditGoalActivity : Fragment() {
             startActivity(Intent(activity, HandleDrawerNav::class.java))
         }
         return viewRoot
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 }

@@ -1,37 +1,27 @@
 package com.example.dailycarl.ui
 
+import android.util.Base64
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.media.MediaScannerConnection
-import android.net.Uri
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.dailycarl.R
 import com.example.dailycarl.database.UserDB
-import com.example.dailycarl.helper.ContextWrapper
 import com.example.dailycarl.helper.Preference
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SettingActivity : Fragment() {
 
@@ -40,7 +30,7 @@ class SettingActivity : Fragment() {
     private var imageView: ImageView? = null
     private val GALLERY = 1
     private val CAMERA = 2
-    lateinit var capturePhotoPath: String
+    var capturePhotoPath = ""
     lateinit var preference: Preference
 
     val languageList = arrayOf("en", "th")
@@ -50,11 +40,6 @@ class SettingActivity : Fragment() {
             return SettingActivity()
         }
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
 
     @SuppressLint("ResourceType")
     override fun onCreateView(
@@ -95,6 +80,12 @@ class SettingActivity : Fragment() {
                     if(userDB!=null && userDB.username.toString().isNotEmpty()){
                         settingNameInput.setText( userDB.username.toString() )
                     }
+                    if(userDB!!.profilePic.toString().isNotEmpty()){
+                        capturePhotoPath = userDB!!.profilePic.toString()
+                        val img = Base64.decode(capturePhotoPath, Base64.DEFAULT)
+                        val image = BitmapFactory.decodeByteArray(img, 0, img.size)
+                        imageView!!.setImageBitmap(image)
+                    }
                 }
             })
 
@@ -119,6 +110,7 @@ class SettingActivity : Fragment() {
                                         if (task.isSuccessful) {
                                             database.child("Users").child(userId).child("username").setValue(name)
                                             database.child("Users").child(userId).child("userEmail").setValue(email)
+                                            database.child("Users").child(userId).child("profilePic").setValue(capturePhotoPath)
                                             Toast.makeText(activity, "Updated Successfully.", Toast.LENGTH_SHORT).show()
                                             preference.setLoginCount(languageList[spinner.selectedItemPosition])
                                             startActivity(Intent(activity, HandleDrawerNav::class.java))
@@ -156,33 +148,10 @@ class SettingActivity : Fragment() {
     private fun takePhotoFromCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, CAMERA)
-//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-//            // Ensure that there's a camera activity to handle the intent
-//            takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
-//                // Create the File where the photo should go
-//                val photoFile: File? = try {
-//                    createImageFile()
-//                } catch (ex: IOException) {
-//                    // Error occurred while creating the File
-//                    null
-//                }
-//                // Continue only if the File was successfully created
-//                photoFile?.also {it ->
-//                    val photoURI: Uri = FileProvider.getUriForFile(
-//                        activity!!.applicationContext,
-//                        "com.example.android.fileprovider",
-//                        it
-//                    )
-//                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-//                    startActivityForResult(takePictureIntent, CAMERA)
-//                }
-//            }
-//        }
     }
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == GALLERY)
         {
             if (data != null)
@@ -190,69 +159,24 @@ class SettingActivity : Fragment() {
                 val contentURI = data!!.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
-//                    saveImage(bitmap)
+                    saveImage(bitmap)
                     imageView!!.setImageBitmap(bitmap)
                 }
-                catch (e: IOException)
-                {
-                    e.printStackTrace()
-                }
+                catch (e: IOException) { e.printStackTrace() }
             }
         }
         else if (requestCode == CAMERA)
         {
             val thumbnail = data!!.extras!!.get("data") as Bitmap
             imageView!!.setImageBitmap(thumbnail)
-//            saveImage(thumbnail)
+            saveImage(thumbnail)
         }
     }
 
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File? = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(
-            "JPEG_${timeStamp}_", /* prefix */
-            ".jpg", /* suffix */
-            storageDir /* directory */
-        ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
-            capturePhotoPath = "file:$absolutePath"
-        }
+    private fun saveImage(myBitmap: Bitmap) {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        capturePhotoPath = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT)
     }
 
-//    private fun saveImage(myBitmap: Bitmap):String {
-//        val bytes = ByteArrayOutputStream()
-//        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-//        val wallpaperDirectory = File (
-//            (Environment.getExternalStorageDirectory()).toString() + "/Photos")
-//        Log.d("fee", wallpaperDirectory.toString())
-//        if (!wallpaperDirectory.exists())
-//        {
-//            wallpaperDirectory.mkdirs()
-//        }
-//        try
-//        {
-//            Log.d("heel", wallpaperDirectory.toString())
-//            val f = File(wallpaperDirectory, ((Calendar.getInstance()
-//                .timeInMillis).toString() + ".png"))
-//            f.createNewFile()
-//            val fo = FileOutputStream(f)
-//            fo.write(bytes.toByteArray())
-//            MediaScannerConnection.scanFile(activity, arrayOf(f.path), arrayOf("image/png"), null)
-//            fo.close()
-//            Log.d("TAG", "File Saved::--->" + f.absolutePath)
-//
-//            return f.absolutePath
-//        }
-//        catch (e1: IOException){
-//            e1.printStackTrace()
-//        }
-//        return ""
-//    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }
