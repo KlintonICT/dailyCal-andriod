@@ -128,8 +128,8 @@ class SettingActivity : Fragment() {
     }
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(activity)
-        pictureDialog.setTitle("Choose photo from...")
-        val pictureDialogItems = arrayOf("Gallery", "Camera")
+        pictureDialog.setTitle(getString(R.string.choose_photo_from))
+        val pictureDialogItems = arrayOf(getString(R.string.gallery), getString(R.string.camera))
         pictureDialog.setItems(pictureDialogItems
         ) { _, which ->
             when (which) {

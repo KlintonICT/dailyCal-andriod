@@ -24,9 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val pointToSignup = findViewById<TextView>(R.id.point_to_signup)
         pointToSignup.setOnClickListener{
-//            val signupPage = Intent(this, SignupActivity::class.java)
-//            startActivity(signupPage)
-            val signupPage = Intent(this, MapActivity::class.java)
+            val signupPage = Intent(this, SignupActivity::class.java)
             startActivity(signupPage)
         }
 

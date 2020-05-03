@@ -68,7 +68,7 @@ class EatAndExActivity : AppCompatActivity() {
         imageView!!.setOnClickListener{ showPictureDialog() }
 
         backBtn.setOnClickListener{ startActivity(Intent(this@EatAndExActivity, HandleDrawerNav::class.java)) }
-        
+
         if( activityType != null && activityType == "eat" ){
             activityBar.text = getString(R.string.ex_activity_exfood)
         }else if(activityType != null && activityType == "ex"){
@@ -125,8 +125,8 @@ class EatAndExActivity : AppCompatActivity() {
 
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(this)
-        pictureDialog.setTitle("Choose photo from...")
-        val pictureDialogItems = arrayOf("Gallery", "Camera")
+        pictureDialog.setTitle(getString(R.string.choose_photo_from))
+        val pictureDialogItems = arrayOf(getString(R.string.gallery), getString(R.string.camera))
         pictureDialog.setItems(pictureDialogItems
         ) { _, which ->
             when (which) {

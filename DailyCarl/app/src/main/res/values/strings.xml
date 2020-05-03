@@ -144,6 +144,9 @@
     <string name="location_page_result" />
     <string name="location_page_submit">OK</string>
     <string name="location_input">Choose your location</string>
+    <string name="choose_photo_from">Choose photo from...</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
 
     <string-array name="language_list">
         <item>English</item>

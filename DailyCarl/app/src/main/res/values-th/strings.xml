@@ -144,6 +144,9 @@
     <string name="location_page_result" />
     <string name="location_page_submit">ตกลง</string>
     <string name="location_input">เลือกตำแหน่งของคุณ</string>
+    <string name="choose_photo_from">เลือกรูปภาพจาก...</string>
+    <string name="gallery">อัลบัม</string>
+    <string name="camera">กล้อง</string>
 
     <string-array name="language_list">
         <item>อังกฤษ</item>
