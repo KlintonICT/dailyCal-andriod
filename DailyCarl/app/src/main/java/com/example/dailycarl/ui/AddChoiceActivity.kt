@@ -23,16 +23,16 @@ class AddChoiceActivity : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.activity_addchoice, container, false)
-        val intent = Intent(activity, EatAndExActivity::class.java)
+        val intent = Intent(activity, MapActivity::class.java)
         val addEatBtn = view.findViewById<TextView>(R.id.add_eat_act_btn)
         val addExBtn = view.findViewById<TextView>(R.id.add_not_food_act)
         addEatBtn.setOnClickListener {
             intent.putExtra("activityType", "eat")
-            activity?.startActivity(intent);
+            activity?.startActivity(intent)
         }
         addExBtn.setOnClickListener {
             intent.putExtra("activityType", "ex")
-            activity?.startActivity(intent);
+            activity?.startActivity(intent)
         }
         return view
     }

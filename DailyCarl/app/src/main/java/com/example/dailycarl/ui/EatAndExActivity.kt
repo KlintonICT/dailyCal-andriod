@@ -39,7 +39,7 @@ class EatAndExActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var menu   : EditText
     private lateinit var calory : EditText
-    private lateinit var location: EditText
+    private lateinit var location: TextView
     private lateinit var okBtn  : TextView
     lateinit var preference: Preference
     var capturePhotoPath = ""
@@ -48,7 +48,7 @@ class EatAndExActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eat_and_ex)
 
-        val activityType:String = intent.getStringExtra("activityType")
+        val activityType        = intent.getStringExtra("activityTypeTo")
         val activityBar         = findViewById<TextView>(R.id.eat_and_act_tab_bar)
         val backBtn             = findViewById<ImageView>(R.id.left_arrow)
         val pickDay             = findViewById<TextView>(R.id.date_act_picker)
@@ -58,13 +58,17 @@ class EatAndExActivity : AppCompatActivity() {
             okBtn               = findViewById(R.id.ok_act_btn)
         imageView               = findViewById(R.id.activity_image)
 
+        val getLocation = intent.getStringExtra("location")
+        val split = getLocation.split(",")
+        location!!.text = split[0]
+
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
 
         imageView!!.setOnClickListener{ showPictureDialog() }
 
         backBtn.setOnClickListener{ startActivity(Intent(this@EatAndExActivity, HandleDrawerNav::class.java)) }
-
+        
         if( activityType != null && activityType == "eat" ){
             activityBar.text = getString(R.string.ex_activity_exfood)
         }else if(activityType != null && activityType == "ex"){
@@ -78,16 +82,16 @@ class EatAndExActivity : AppCompatActivity() {
         pickDay.setOnClickListener {
             DatePickerDialog(this, DatePickerDialog.OnDateSetListener{ _, mYear, mMonth, mDay ->
                 pickDay.text = "" + mDay + "/" + (mMonth+1) + "/" + mYear
-                handleOkayButton("" + mDay + "/" + (mMonth+1) + "/" + mYear, activityType)
+                handleOkayButton("" + mDay + "/" + (mMonth+1) + "/" + mYear, activityType, split[0])
             }, year, month, day).show()
         }
     }
 
-    private fun handleOkayButton(date: String, actType: String) {
+    private fun handleOkayButton(date: String, actType: String, location: String) {
         okBtn.setOnClickListener {
             val menuField      = menu.text.toString().trim{ it <= ' ' }
             val caloryField    = calory.text.toString().trim{ it <= ' ' }
-            val locationField = location.text.toString()
+            val locationField  = location
             if(menuField.isEmpty()){
                 Toast.makeText(applicationContext, "Please enter your activity.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

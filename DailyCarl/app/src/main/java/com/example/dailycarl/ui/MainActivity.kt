@@ -24,8 +24,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val pointToSignup = findViewById<TextView>(R.id.point_to_signup)
         pointToSignup.setOnClickListener{
-            val signup_page = Intent(this, SignupActivity::class.java)
-            startActivity(signup_page)
+//            val signupPage = Intent(this, SignupActivity::class.java)
+//            startActivity(signupPage)
+            val signupPage = Intent(this, MapActivity::class.java)
+            startActivity(signupPage)
         }
 
         mAuth = FirebaseAuth.getInstance()
