@@ -125,10 +125,6 @@ class ViewCaloryWeek : Fragment() {
         }
     }
 
-    private fun tableFood(viewRoot: View, date: String){
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }

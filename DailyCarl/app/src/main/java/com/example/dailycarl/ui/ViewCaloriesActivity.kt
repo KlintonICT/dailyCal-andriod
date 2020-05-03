@@ -25,7 +25,7 @@ import com.google.firebase.database.ktx.getValue
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ViewCaloriesActivity : Fragment() {
+class ViewCaloriesActivity : Fragment(){
 
     var mAuth: FirebaseAuth? = null
     private lateinit var database: DatabaseReference
@@ -82,20 +82,19 @@ class ViewCaloriesActivity : Fragment() {
                     val recycleList = ArrayList<RecycleviewDB>()
                     for(snapShot in dataSnapshot.children) {
                         val activityDB = snapShot.getValue<ActivityDB>()
+                        val key = snapShot.key.toString()
                         if(activityDB!!.type.toString() == "ex" && activityDB!!.date.toString() == date){
-                            recycleList += RecycleviewDB(R.drawable.ex_logo,
+                            recycleList += RecycleviewDB(key, R.drawable.ex_logo,
                                 getString(R.string.ex), activityDB!!.menu.toString(), activityDB!!.activityCalory.toString(), activityDB!!.location.toString())
                         }
                         if(activityDB!!.type.toString() == "eat" && activityDB!!.date.toString() == date){
-                            recycleList += RecycleviewDB(R.drawable.food_logo,
+                            recycleList += RecycleviewDB(key, R.drawable.food_logo,
                                 getString(R.string.food), activityDB!!.menu.toString(), activityDB!!.activityCalory.toString(), activityDB!!.location.toString())
                         }
                     }
                     val recycleView = viewRoot.findViewById<RecyclerView>(R.id.recycle_view)
-                    recycleView.adapter =
-                        RecycleViewAdapter(
-                            recycleList
-                        )
+                    val adapter = RecycleViewAdapter(recycleList)
+                    recycleView.adapter = adapter
                     recycleView.layoutManager = LinearLayoutManager(activity?.applicationContext)
                     recycleView.setHasFixedSize(true)
                 }
