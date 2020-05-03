@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="18sp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/viewMonth_goal_ex_title" />
 
             <TextView
@@ -61,7 +62,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="18sp"
-                android:layout_marginStart="44dp"
                 android:text="@string/viewMonth_goal_ex_data" />
         </LinearLayout>
 
@@ -78,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="18sp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/viewMonth_cal_ex_title" />
 
             <TextView
@@ -86,7 +87,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="18sp"
-                android:layout_marginStart="15dp"
                 android:text="@string/viewMonth_cal_ex_data" />
         </LinearLayout>
 
@@ -111,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="18sp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/viewMonth_goal_food_title" />
 
             <TextView
@@ -119,7 +120,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="18sp"
-                android:layout_marginStart="40dp"
                 android:text="@string/viewMonth_goal_food_data" />
         </LinearLayout>
 
@@ -136,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="18sp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/viewMonth_cal_food_title" />
 
             <TextView
@@ -144,7 +145,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:textSize="18sp"
-                android:layout_marginStart="17dp"
                 android:text="@string/viewMonth_cal_food_data" />
         </LinearLayout>
 

@@ -1,6 +1,8 @@
 package com.example.dailycarl.ui
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
@@ -12,14 +14,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.dailycarl.R
 import com.example.dailycarl.database.UserDB
+import com.example.dailycarl.helper.ContextWrapper
+import com.example.dailycarl.helper.Preference
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -40,6 +41,9 @@ class SettingActivity : Fragment() {
     private val GALLERY = 1
     private val CAMERA = 2
     lateinit var capturePhotoPath: String
+    lateinit var preference: Preference
+
+    val languageList = arrayOf("en", "th")
 
     companion object {
         fun newInstance(): Fragment {
@@ -49,19 +53,26 @@ class SettingActivity : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        val language_choose = ArrayAdapter.createFromResource(this,
-//            R.array.language_list, android.R.layout.simple_spinner_dropdown_item)
-//        language_choose.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     }
 
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.activity_setting, container, false)
+        val context = activity!!.applicationContext
+        preference = Preference(activity!!.applicationContext)
+        val spinner = view.findViewById<Spinner>(R.id.language_list)
+        val lang = preference.getLoginCount()
+        val index = languageList.indexOf(lang)
+        if(index >= 0){
+            spinner.setSelection(index)
+        }
+        spinner.adapter = ArrayAdapter.createFromResource(context, R.array.language_list, android.R.layout.simple_spinner_dropdown_item)
+
         imageView = view.findViewById(R.id.profile_view)
         imageView!!.setOnClickListener{ showPictureDialog() }
         var settingNameInput  = view.findViewById<EditText>(R.id.setting_name_input)
@@ -109,6 +120,7 @@ class SettingActivity : Fragment() {
                                             database.child("Users").child(userId).child("username").setValue(name)
                                             database.child("Users").child(userId).child("userEmail").setValue(email)
                                             Toast.makeText(activity, "Updated Successfully.", Toast.LENGTH_SHORT).show()
+                                            preference.setLoginCount(languageList[spinner.selectedItemPosition])
                                             startActivity(Intent(activity, HandleDrawerNav::class.java))
                                         }else{
                                             Toast.makeText(activity, "Updating Fail", Toast.LENGTH_SHORT).show()
