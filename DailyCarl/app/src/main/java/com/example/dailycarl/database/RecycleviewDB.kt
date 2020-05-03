@@ -1,6 +1,7 @@
 package com.example.dailycarl.database
 
 data class RecycleviewDB(
+    val actId             : String,
     val imageResource     : Int,
     val activityTitle     : String,
     val activityData      : String,
