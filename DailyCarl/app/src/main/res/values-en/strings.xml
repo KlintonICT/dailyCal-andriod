@@ -137,6 +137,13 @@
     <string name="month">Month</string>
     <string name="ex">Exercise: </string>
     <string name="food">Food: </string>
+    <string name="location_page_bar" >Location</string>
+    <string name="location_page_search">Enter your location</string>
+    <string name="location_page_searchBtn">Search</string>
+    <string name="location_page_title">Location:</string>
+    <string name="location_page_result" />
+    <string name="location_page_submit">OK</string>
+    <string name="location_input">Choose your location</string>
 
     <string-array name="language_list">
         <item>English</item>

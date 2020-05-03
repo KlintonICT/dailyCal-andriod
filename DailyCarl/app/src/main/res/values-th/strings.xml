@@ -137,6 +137,13 @@
     <string name="month">เดือน</string>
     <string name="ex">การออกกำลัง: </string>
     <string name="food">อาหาร: </string>
+    <string name="location_page_bar" >ที่ตั้ง</string>
+    <string name="location_page_search">ป้อนตำแหน่งของคุณ</string>
+    <string name="location_page_searchBtn">ค้นหา</string>
+    <string name="location_page_title">ที่ตั้ง:</string>
+    <string name="location_page_result" />
+    <string name="location_page_submit">ตกลง</string>
+    <string name="location_input">เลือกตำแหน่งของคุณ</string>
 
     <string-array name="language_list">
         <item>อังกฤษ</item>
