@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/nav_addActivity"
+            android:icon="@drawable/ic_accessibility"
+            android:title="@string/nav_add_activity" />
+        <item
+            android:id="@+id/nav_viewCalory"
+            android:icon="@drawable/ic_pie_chart"
+            android:title="@string/nav_viewCalory" />
+        <item
+            android:id="@+id/nav_editGoal"
+            android:icon="@drawable/ic_edit"
+            android:title="@string/nav_editGoal" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/nav_setting" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/menu_logout" />
+    </group>
+
+</menu>
